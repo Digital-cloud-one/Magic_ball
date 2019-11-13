@@ -75,6 +75,6 @@ public class MagicBall {
             userMakesDecision(userAnswerYesNo);
             return;
         }
-
     }
+    private void fooTestToSee(){}
 }
