@@ -75,6 +75,5 @@ public class MagicBall {
             userMakesDecision(userAnswerYesNo);
             return;
         }
-
     }
 }
