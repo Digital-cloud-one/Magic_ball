@@ -7,18 +7,22 @@ public class MagicBall {
     private static Scanner scannerUserInformation = new Scanner(System.in);
 
     public static void main(String[] args) {
-        String userAnswerYesNo = startFirstWords();
-        userMakesDecision(userAnswerYesNo);
+        showTextFirstWords();
+        String userAnswerYesNo = userSolution();
+        switchCheckUserSolve(userAnswerYesNo);
     }
 
-    private static String startFirstWords() {
+    private static void showTextFirstWords (){   //showTextFirstWords   userSolution
         System.out.println("This game begins now !!! \n" +
                 "But you must know that your life never be the same if you play the game Magic balls. \n" +
                 "Are you ready?  ((Yes)= Y) or ((No)= N) ");
+    }
+
+    private static String userSolution() {
         return scannerUserInformation.next();
     }
 
-    private static void userMakesDecision(String userAnswerYesNo) {
+    private static void switchCheckUserSolve(String userAnswerYesNo) {
         switch (userAnswerYesNo) {
             case "Y":
                 userQestion();
@@ -36,7 +40,7 @@ public class MagicBall {
                 System.err.println("Something is wrong \n" +
                         "Do you want to try again?  ((Yes)= Y) or ((No)= N)");
                 String userAnswerYesNo2 = scannerUserInformation.next();
-                userMakesDecision(userAnswerYesNo2);
+                switchCheckUserSolve(userAnswerYesNo2);
 
         }
     }
@@ -72,7 +76,7 @@ public class MagicBall {
             }
             System.out.println("Do you have any question? ((Yes)= Y) or ((No)= N)");
             String userAnswerYesNo = scannerUserInformation.next();
-            userMakesDecision(userAnswerYesNo);
+            switchCheckUserSolve(userAnswerYesNo);
             return;
         }
     }
