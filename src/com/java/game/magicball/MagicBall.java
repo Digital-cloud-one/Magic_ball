@@ -76,5 +76,4 @@ public class MagicBall {
             return;
         }
     }
-    private void fooTestToSee(){}
 }
