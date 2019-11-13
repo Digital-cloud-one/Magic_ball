@@ -77,5 +77,5 @@ public class MagicBall {
         }
 
     }
-    private void foo(){}
+    private void fooTestCommit(){}
 }
