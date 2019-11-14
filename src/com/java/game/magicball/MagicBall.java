@@ -7,16 +7,27 @@ public class MagicBall {
     private static Scanner scannerUserInformation = new Scanner(System.in);
     private static boolean flag = false;
 
-    public static void main(String[] args) {
+    void starting() {
+        begin();
+
+    }
+
+    private static void begin() {
         showTextFirstSentence();
         String userAnswerYesNo = userSolution();
         flag = switchCheckUserSolve(userAnswerYesNo);
-        if(flag){
-            String userAnswerSecondYesNo = userSolution();
+        while(true) {
+            if (flag) {
+                showUserAskQestion();
+                userAskQestion();
+                forUseAnswer();
+            } else {
+
+            }
         }
     }
 
-    private static void showTextFirstSentence (){
+    private static void showTextFirstSentence() {
         System.out.println("This game begins now !!! \n" +
                 "But you must know that your life never be the same if you play the game Magic balls. \n" +
                 "Are you ready?  ((Yes)= Y) or ((No)= N) ");
@@ -30,11 +41,9 @@ public class MagicBall {
         flag = false;
         switch (userAnswerYesNo) {
             case "Y":
-                userQestion();
-                break;
+                return true;
             case "y":
-                userQestion();
-                break;
+                return true;
             case "N":
                 System.out.println("Game Over");
                 break;
@@ -43,23 +52,25 @@ public class MagicBall {
                 break;
             default:
                 flag = showTextSecondSentenceAndFlag();
-//                System.err.println("Something is wrong \n" +
-//                        "Do you want to try again?  ((Yes)= Y) or ((No)= N)");
-//                String userAnswerYesNo2 = scannerUserInformation.next();
-//                switchCheckUserSolve(userAnswerYesNo2);
         }
         return flag;
     }
 
-    private static boolean showTextSecondSentenceAndFlag(){
+    private static boolean showTextSecondSentenceAndFlag() {
         System.err.println("Something is wrong \n" +
-                        "Do you want to try again?  ((Yes)= Y) or ((No)= N)");
+                "Do you want to try again?  ((Yes)= Y) or ((No)= N)");
         return true;
     }
-
-    private static void userQestion() {
-        System.out.println("Ask a question and get an answer");
+    private static void showUserAskQestion(){
+        System.out.println("Ask a question and receive an answer");
+    }
+    private static void userAskQestion(){
         String stringUserQestion = scannerUserInformation.next();
+    }
+
+    private static void forUseAnswer() {
+//        System.out.println("Ask a question and get an answer");
+//        String stringUserQestion = scannerUserInformation.next();
         Random random = new Random();
         while (true) {
             int randomNumber = random.nextInt(6);
