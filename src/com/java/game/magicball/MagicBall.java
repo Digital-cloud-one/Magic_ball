@@ -5,14 +5,18 @@ import java.util.Scanner;
 
 public class MagicBall {
     private static Scanner scannerUserInformation = new Scanner(System.in);
+    private static boolean flag = false;
 
     public static void main(String[] args) {
-        showTextFirstWords();
+        showTextFirstSentence();
         String userAnswerYesNo = userSolution();
-        switchCheckUserSolve(userAnswerYesNo);
+        flag = switchCheckUserSolve(userAnswerYesNo);
+        if(flag){
+            String userAnswerSecondYesNo = userSolution();
+        }
     }
 
-    private static void showTextFirstWords (){   //showTextFirstWords   userSolution
+    private static void showTextFirstSentence (){
         System.out.println("This game begins now !!! \n" +
                 "But you must know that your life never be the same if you play the game Magic balls. \n" +
                 "Are you ready?  ((Yes)= Y) or ((No)= N) ");
@@ -22,7 +26,8 @@ public class MagicBall {
         return scannerUserInformation.next();
     }
 
-    private static void switchCheckUserSolve(String userAnswerYesNo) {
+    private static boolean switchCheckUserSolve(String userAnswerYesNo) {
+        flag = false;
         switch (userAnswerYesNo) {
             case "Y":
                 userQestion();
@@ -37,12 +42,19 @@ public class MagicBall {
                 System.out.println("Game Over ");
                 break;
             default:
-                System.err.println("Something is wrong \n" +
-                        "Do you want to try again?  ((Yes)= Y) or ((No)= N)");
-                String userAnswerYesNo2 = scannerUserInformation.next();
-                switchCheckUserSolve(userAnswerYesNo2);
-
+                flag = showTextSecondSentenceAndFlag();
+//                System.err.println("Something is wrong \n" +
+//                        "Do you want to try again?  ((Yes)= Y) or ((No)= N)");
+//                String userAnswerYesNo2 = scannerUserInformation.next();
+//                switchCheckUserSolve(userAnswerYesNo2);
         }
+        return flag;
+    }
+
+    private static boolean showTextSecondSentenceAndFlag(){
+        System.err.println("Something is wrong \n" +
+                        "Do you want to try again?  ((Yes)= Y) or ((No)= N)");
+        return true;
     }
 
     private static void userQestion() {
