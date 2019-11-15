@@ -5,45 +5,74 @@ import java.util.Scanner;
 
 public class MagicBall {
     private static Scanner scannerUserInformation = new Scanner(System.in);
+    private static boolean flag = false;
 
-    public static void main(String[] args) {
-        String userAnswerYesNo = startFirstWords();
-        userMakesDecision(userAnswerYesNo);
+    void starting() {
+        begin();
+
     }
 
-    private static String startFirstWords() {
-        System.out.println("This game begins now !!! \n" +
-                "But you must know that your life never be the same if you play the game Magic balls. \n" +
-                "Are you ready?  ((Yes)= Y) or ((No)= N) ");
-        return scannerUserInformation.next();
-    }
-
-    private static void userMakesDecision(String userAnswerYesNo) {
-        switch (userAnswerYesNo) {
-            case "Y":
-                userQestion();
-                break;
-            case "y":
-                userQestion();
-                break;
-            case "N":
-                System.out.println("Game Over");
-                break;
-            case "n":
-                System.out.println("Game Over ");
-                break;
-            default:
-                System.err.println("Something is wrong \n" +
-                        "Do you want to try again?  ((Yes)= Y) or ((No)= N)");
-                String userAnswerYesNo2 = scannerUserInformation.next();
-                userMakesDecision(userAnswerYesNo2);
-
+    private static void begin() {
+        showTextFirstSentence();
+        String userAnswerYesNo = userSolution();
+        flag = switchCheckUserSolve(userAnswerYesNo);
+        while(true) {
+            if (flag) {
+                showUserAskQestion();
+                userAskQestion();
+                forUseAnswer();
+            } else {
+                return;
+            }
         }
     }
 
-    private static void userQestion() {
-        System.out.println("Ask a question and get an answer");
+    private static void showTextFirstSentence() {
+        System.out.println("This game begins now !!! \n" +
+                "But you must know that your life never be the same if you play the game Magic balls. \n" +
+                "Are you ready?  ((Yes)= Y) or ((No)= N) ");
+    }
+
+    private static String userSolution() {
+        return scannerUserInformation.next();
+    }
+
+    private static boolean switchCheckUserSolve(String userAnswerYesNo) {
+        flag = false;
+        switch (userAnswerYesNo) {
+            case "Y":
+                System.out.println("good choice, man");
+                return true;
+            case "y":
+                System.out.println("good choice");
+                return true;
+            case "N":
+                System.out.println("Game Over");
+                return false;
+            case "n":
+                System.out.println("Game Over ");
+                return false;
+            default:
+                flag = showTextSecondSentenceAndFlag();
+        }
+        return flag;
+    }
+
+    private static boolean showTextSecondSentenceAndFlag() {
+        System.err.println("Something is wrong \n" +
+                "Do you want to try again?  ((Yes)= Y) or ((No)= N)");
+        return true;
+    }
+    private static void showUserAskQestion(){
+        System.out.println("Ask a question and receive an answer");
+    }
+    private static void userAskQestion(){
         String stringUserQestion = scannerUserInformation.next();
+    }
+
+    private static void forUseAnswer() {
+//        System.out.println("Ask a question and get an answer");
+//        String stringUserQestion = scannerUserInformation.next();
         Random random = new Random();
         while (true) {
             int randomNumber = random.nextInt(6);
@@ -72,9 +101,8 @@ public class MagicBall {
             }
             System.out.println("Do you have any question? ((Yes)= Y) or ((No)= N)");
             String userAnswerYesNo = scannerUserInformation.next();
-            userMakesDecision(userAnswerYesNo);
+            switchCheckUserSolve(userAnswerYesNo);
             return;
         }
-
     }
 }
