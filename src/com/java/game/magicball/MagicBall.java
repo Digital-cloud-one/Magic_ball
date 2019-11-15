@@ -22,7 +22,7 @@ public class MagicBall {
                 userAskQestion();
                 forUseAnswer();
             } else {
-
+                return;
             }
         }
     }
@@ -41,15 +41,17 @@ public class MagicBall {
         flag = false;
         switch (userAnswerYesNo) {
             case "Y":
+                System.out.println("good choice, man");
                 return true;
             case "y":
+                System.out.println("good choice");
                 return true;
             case "N":
                 System.out.println("Game Over");
-                break;
+                return false;
             case "n":
                 System.out.println("Game Over ");
-                break;
+                return false;
             default:
                 flag = showTextSecondSentenceAndFlag();
         }
