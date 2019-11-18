@@ -5,6 +5,7 @@ import java.util.Scanner;
 
 public class MagicBall {
     private static Scanner scannerUserInformation = new Scanner(System.in);
+    private static boolean flagFirst = false;
     private static boolean flag = false;
 
     void starting() {
@@ -14,9 +15,21 @@ public class MagicBall {
 
     private static void begin() {
         showTextFirstSentence();
-        String userAnswerYesNo = userSolution();
-        flag = switchCheckUserSolve(userAnswerYesNo);
-        while(true) {
+        String userAnswerPlayNotPlay = userWriteSolutionYesNo();
+        flagFirst = checkUserSolutionPlayNotPlay(userAnswerPlayNotPlay);
+        while (true) {
+            if (flagFirst) {
+                break;
+            } else {
+                System.out.println("Game Over ");
+                return;
+            }
+        }
+        showUserAskQestion();
+        userAskQestion();
+ //       String userAnswerYesNo = userWriteSolutionYesNo();
+        flag = checkUserSolution(userAnswerYesNo);
+        while (true) {
             if (flag) {
                 showUserAskQestion();
                 userAskQestion();
@@ -33,11 +46,32 @@ public class MagicBall {
                 "Are you ready?  ((Yes)= Y) or ((No)= N) ");
     }
 
-    private static String userSolution() {
+    private static String userWriteSolutionYesNo() {
         return scannerUserInformation.next();
     }
 
-    private static boolean switchCheckUserSolve(String userAnswerYesNo) {
+    private static boolean checkUserSolutionPlayNotPlay(String userAnswerPlayNotPlay) {
+        flagFirst = false;
+        switch (userAnswerPlayNotPlay) {
+            case "Y":
+                System.out.println("good choice! ");
+                return true;
+            case "y":
+                System.out.println("good choice!");
+                return true;
+            case "N":
+                System.out.println("It's your decision");
+                return false;
+            case "n":
+                System.out.println("It's your decision ");
+                return false;
+            default:
+                flagFirst = showTextSecondSentenceAndFlag();
+        }
+        return flagFirst;
+    }
+
+    private static boolean checkUserSolution(String userAnswerYesNo) {
         flag = false;
         switch (userAnswerYesNo) {
             case "Y":
@@ -63,10 +97,12 @@ public class MagicBall {
                 "Do you want to try again?  ((Yes)= Y) or ((No)= N)");
         return true;
     }
-    private static void showUserAskQestion(){
+
+    private static void showUserAskQestion() {
         System.out.println("Ask a question and receive an answer");
     }
-    private static void userAskQestion(){
+
+    private static void userAskQestion() {
         String stringUserQestion = scannerUserInformation.next();
     }
 
@@ -101,7 +137,7 @@ public class MagicBall {
             }
             System.out.println("Do you have any question? ((Yes)= Y) or ((No)= N)");
             String userAnswerYesNo = scannerUserInformation.next();
-            switchCheckUserSolve(userAnswerYesNo);
+            checkUserSolution(userAnswerYesNo);
             return;
         }
     }
